@@ -1,1 +1,19 @@
-branch test
+Folder
+Data
+- Train
+-- Cat
+--- image
+--- label
+
+-- Dog
+--- image
+--- label
+
+- Valid
+-- Cat
+--- image
+--- label
+
+-- Dog
+--- image
+--- label
