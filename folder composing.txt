@@ -3,7 +3,15 @@ Data
 - Train
 -- Cat
 --- image
+---- pose
+----- pose
+------ video_name
+------- frame.jpg
+
 --- label
+----pose
+-----pose
+------ video_name.json
 
 -- Dog
 --- image
