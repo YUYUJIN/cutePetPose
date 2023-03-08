@@ -23,8 +23,8 @@ for root_foloder in root_folders:
     print(root_foloder+' start')
     labels=os.listdir(os.path.join(data_root,root_foloder))
     for label in labels:
-        save_path_images=os.path.join(main_root,root_foloder,'images')
-        save_path_labels=os.path.join(main_root,root_foloder,'labels')
+        save_path_images=os.path.join(main_root,'images')
+        save_path_labels=os.path.join(main_root,'labels')
         os.makedirs(save_path_images,exist_ok=True)
         os.makedirs(save_path_labels,exist_ok=True)
 
@@ -36,7 +36,7 @@ for root_foloder in root_folders:
                 files=os.listdir(os.path.join(data_root,root_foloder,label,act))
                 for i,file in enumerate(files):
                     if len(file.split('.'))==1:
-                        json_path = os.path.join(data_root,root_foloder,label,act,file+'_m.json')
+                        json_path = os.path.join(data_root,root_foloder,label,act,file+'.json')
                         with open(json_path, 'r', encoding='utf-8') as f:
                             label_dict = json.load(f)
 
