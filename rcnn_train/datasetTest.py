@@ -50,31 +50,32 @@ def visualize(image, bboxes, keypoints, image_original=None, bboxes_original=Non
     
     plt.show()
 
-dataset = ClassDataset('D:/test/train', transform=train_transform(), demo=True)
-data_loader = DataLoader(dataset, batch_size=1, shuffle=True, collate_fn=collate_fn)
+if __name__=='__main__':
+    dataset = ClassDataset('D:/test/train', transform=train_transform(), demo=True)
+    data_loader = DataLoader(dataset, batch_size=1, shuffle=True, collate_fn=collate_fn)
 
-iterator = iter(data_loader)
-batch = next(iterator)
+    iterator = iter(data_loader)
+    batch = next(iterator)
 
 
-# Show some images
+    # Show some images
 
-keypoints_classes_ids2names = {0:"nose", 1:"center_of_forehead", 2:"corner_of_the_mouth", 3:"center_of_lower_lip", 4:"neck", 5:"front_right_start",
-    6:"front_left_leg_start", 7:"front_right_leg_ankle", 8:"front_left_leg_ankle", 9:"right_femur", 10:"left_femur",
-    11:"hind_right_leg_ankle", 12:"hind_left_leg_ankle", 13:"tail_start", 14:"tail_tip"}
-        
-image = (batch[0][0].permute(1,2,0).numpy() * 255).astype(np.uint8)
-bboxes = batch[1][0]['boxes'].detach().cpu().numpy().astype(np.int32).tolist()
+    keypoints_classes_ids2names = {0:"nose", 1:"center_of_forehead", 2:"corner_of_the_mouth", 3:"center_of_lower_lip", 4:"neck", 5:"front_right_start",
+        6:"front_left_leg_start", 7:"front_right_leg_ankle", 8:"front_left_leg_ankle", 9:"right_femur", 10:"left_femur",
+        11:"hind_right_leg_ankle", 12:"hind_left_leg_ankle", 13:"tail_start", 14:"tail_tip"}
+            
+    image = (batch[0][0].permute(1,2,0).numpy() * 255).astype(np.uint8)
+    bboxes = batch[1][0]['boxes'].detach().cpu().numpy().astype(np.int32).tolist()
 
-keypoints = []
-for kps in batch[1][0]['keypoints'].detach().cpu().numpy().astype(np.int32).tolist():
-    keypoints.append([kp[:2] for kp in kps])
+    keypoints = []
+    for kps in batch[1][0]['keypoints'].detach().cpu().numpy().astype(np.int32).tolist():
+        keypoints.append([kp[:2] for kp in kps])
 
-image_original = (batch[2][0].permute(1,2,0).numpy() * 255).astype(np.uint8)
-bboxes_original = batch[3][0]['boxes'].detach().cpu().numpy().astype(np.int32).tolist()
+    image_original = (batch[2][0].permute(1,2,0).numpy() * 255).astype(np.uint8)
+    bboxes_original = batch[3][0]['boxes'].detach().cpu().numpy().astype(np.int32).tolist()
 
-keypoints_original = []
-for kps in batch[3][0]['keypoints'].detach().cpu().numpy().astype(np.int32).tolist():
-    keypoints_original.append([kp[:2] for kp in kps])
+    keypoints_original = []
+    for kps in batch[3][0]['keypoints'].detach().cpu().numpy().astype(np.int32).tolist():
+        keypoints_original.append([kp[:2] for kp in kps])
 
-visualize(image, bboxes, keypoints, image_original, bboxes_original, keypoints_original)
+    visualize(image, bboxes, keypoints, image_original, bboxes_original, keypoints_original)
