@@ -26,8 +26,8 @@ for tr_val_img,tr_val_json,tr_val_name in zip(img_li,json_li,tv):
         count+=1
     count = 1
     for file in tr_val_json:
-        os.makedirs(f'{copy_path}\\{tr_val_name}\\label', exist_ok=True)
-        shutil.copyfile(file, f'{copy_path}\\{tr_val_name}\\label\\' + os.path.basename(file))
+        os.makedirs(f'{copy_path}\\{tr_val_name}\\labels', exist_ok=True)
+        shutil.copyfile(file, f'{copy_path}\\{tr_val_name}\\labels\\' + os.path.basename(file))
         if count%50==0:
             print(f'train json {count}/{len(tr_val_json)}')
         count+=1
