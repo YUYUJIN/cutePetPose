@@ -21,7 +21,7 @@ data_loader_test = DataLoader(dataset_test, batch_size=1, shuffle=True, collate_
 
 iterator = iter(data_loader_test)
 
-for i in range(1):
+for i in range(5):
     images, targets = next(iterator)
     images = list(image.to(device) for image in images)
 

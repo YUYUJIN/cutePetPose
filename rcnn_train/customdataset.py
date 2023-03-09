@@ -39,6 +39,7 @@ class ClassDataset(Dataset):
         
         with open(annotations_path) as f:
             data = json.load(f)
+            category=data['category_id']
             bboxes_original = data['bboxes']
             keypoints_original = data['keypoints']
             bboxes_labels_original = ['Detected Object' for _ in bboxes_original]            
@@ -84,7 +85,7 @@ class ClassDataset(Dataset):
         bboxes = torch.as_tensor(bboxes, dtype=torch.float32)       
         target = {}
         target["boxes"] = bboxes
-        target["labels"] = torch.as_tensor([1 for _ in bboxes], dtype=torch.int64) # label objects
+        target["labels"] = torch.as_tensor([category for _ in bboxes], dtype=torch.int64) # label objects
         target["image_id"] = torch.tensor([idx])
         target["area"] = (bboxes[:, 3] - bboxes[:, 1]) * (bboxes[:, 2] - bboxes[:, 0])
         target["iscrowd"] = torch.zeros(len(bboxes), dtype=torch.int64)
@@ -94,7 +95,7 @@ class ClassDataset(Dataset):
         bboxes_original = torch.as_tensor(bboxes_original, dtype=torch.float32)
         target_original = {}
         target_original["boxes"] = bboxes_original
-        target_original["labels"] = torch.as_tensor([1 for _ in bboxes_original], dtype=torch.int64) # label objects
+        target_original["labels"] = torch.as_tensor([category for _ in bboxes_original], dtype=torch.int64) # label objects
         target_original["image_id"] = torch.tensor([idx])
         target_original["area"] = (bboxes_original[:, 3] - bboxes_original[:, 1]) * (bboxes_original[:, 2] - bboxes_original[:, 0])
         target_original["iscrowd"] = torch.zeros(len(bboxes_original), dtype=torch.int64)
