@@ -10,9 +10,14 @@ from torchvision.transforms import functional as F
 from animal_keypoint.utils import collate_fn
 from customdataset import ClassDataset,train_transform
 
-def visualize(image, bboxes, keypoints, image_original=None, bboxes_original=None, keypoints_original=None, text_option=False):
+def visualize(image, labels, bboxes, keypoints, image_original=None, bboxes_original=None, keypoints_original=None, text_option=False):
     fontsize = 18
-    
+    keypoints_classes_ids2names = {0:"nose", 1:"center_of_forehead", 2:"corner_of_the_mouth", 3:"center_of_lower_lip", 4:"neck", 5:"front_right_start",
+        6:"front_left_leg_start", 7:"front_right_leg_ankle", 8:"front_left_leg_ankle", 9:"right_femur", 10:"left_femur",
+        11:"hind_right_leg_ankle", 12:"hind_left_leg_ankle", 13:"tail_start", 14:"tail_tip"}
+    label_dict={1:'cat',2:'dog'}
+
+
     for bbox in bboxes:
         start_point = (bbox[0], bbox[1])
         end_point = (bbox[2], bbox[3])
@@ -29,10 +34,11 @@ def visualize(image, bboxes, keypoints, image_original=None, bboxes_original=Non
         plt.imshow(image)
 
     else:
-        for bbox in bboxes_original:
+        for i,bbox in enumerate(bboxes_original):
             start_point = (bbox[0], bbox[1])
             end_point = (bbox[2], bbox[3])
             image_original = cv2.rectangle(image_original.copy(), start_point, end_point, (0,255,0), 2)
+            image_original = cv2.putText(image_original.copy(),label_dict[labels[i]],start_point,cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0), 3, cv2.LINE_AA)
         
         for kps in keypoints_original:
             for idx, kp in enumerate(kps):

@@ -6,13 +6,14 @@ from model import get_model
 from customdataset import ClassDataset
 from animal_keypoint.utils import collate_fn
 from datasetTest import visualize
+from animal_keypoint.engine import evaluate
 
 label={0:'cat',1:'dog'}
 
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 
 model = get_model(num_keypoints = 15,num_classes=3)
-model.load_state_dict(torch.load('keypointsrcnn_weights.pth'))
+model.load_state_dict(torch.load('keypointsrcnn_weights_13.pth'))
 model.eval()
 
 KEYPOINTS_FOLDER_TEST = 'D:\pet_test\\valid'
@@ -41,7 +42,9 @@ for i in range(5):
     # Firstly, we choose only those objects, which have score above predefined threshold. This is done with choosing elements with [high_scores_idxs] indexes
     # Secondly, we choose only those objects, which are left after NMS is applied. This is done with choosing elements with [post_nms_idxs] indexes
 
-    
+    labels=[]
+    for lbs in output[0]['labels'][high_scores_idxs][post_nms_idxs].detach().cpu().numpy():
+        labels.append(lbs)
 
     keypoints = []
     for kps in output[0]['keypoints'][high_scores_idxs][post_nms_idxs].detach().cpu().numpy():
@@ -51,4 +54,4 @@ for i in range(5):
     for bbox in output[0]['boxes'][high_scores_idxs][post_nms_idxs].detach().cpu().numpy():
         bboxes.append(list(map(int, bbox.tolist())))
         
-    visualize(img_curr, bboxes, keypoints)
+    visualize(img_curr, labels, bboxes, keypoints)
