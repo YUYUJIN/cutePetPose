@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Live Streaming Demonstration</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8  offset-lg-2">
+            <h3 class="mt-5">Live Streaming</h3>
+            <img src="{{ url_for('video_feed') }}" width="100%">
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+<script src="https://cdn.socket.io/4.2.0/socket.io.min.js"></script>
+<script type="text/javascript">
+  const socket = io();
+  // 사용자가 선택한 행동을 전달하는 함수
+  function sendAction(action) {
+    socket.emit('action', {action: action});
+  }
+</script>
+
+
+<!--<!doctype html>-->
+<!--<html>-->
+<!--  <head>-->
+<!--    <title>Video Streaming Demonstration</title>-->
+<!--  </head>-->
+<!--  <body>-->
+<!--    <h1>Video Stream</h1>-->
+<!--    <img id='video-stream' src="" />-->
+<!--    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>-->
+<!--    <script type="text/javascript">-->
+<!--      var socket = io.connect('http://' + document.domain + ':' + location.port);-->
+<!--      socket.on('connect', function() {-->
+<!--        console.log('Connected to socket server.');-->
+<!--      });-->
+<!--      socket.on('frame', function(data) {-->
+<!--        document.getElementById('video-stream').src = 'data:image/jpeg;base64,' + btoa(data.data);-->
+<!--      });-->
+<!--    </script>-->
+<!--  </body>-->
+<!--</html>-->
