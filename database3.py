@@ -4,11 +4,11 @@ import json
 class Database:
     def __init__(self):
         # MySQL Connection 연결
-        self.connect = pymysql.connect(host='127.0.0.1',
-                                       port=3306,
-                                      user='root',
-                                      password='!jukitty950918',
-                                      db='cat', charset='utf8')  # 한글처리 (charset = 'utf8')
+        self.connect = pymysql.connect(host='',
+                                       port=,
+                                      user='',
+                                      password='',
+                                      db='', charset='utf8')  # 한글처리 (charset = 'utf8')
 
         # Connection 으로부터 Cursor 생성
         self.cursor = self.connect.cursor()
