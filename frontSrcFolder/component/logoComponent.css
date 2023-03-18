@@ -1,0 +1,10 @@
+.logoContainer{
+    /* margin-bottom: 20px; */
+    /* margin-top: 30px; */
+    height:200px;
+    padding: 30px;
+}
+.logoImg{
+    width: 150px;
+    height: 150px;
+}

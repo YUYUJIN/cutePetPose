@@ -1,0 +1,48 @@
+
+:root{
+    --width-size:960px;
+    --height-size:540px;
+}
+
+.analyze{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    vertical-align: middle;
+    height: 937px;
+    background-color: rgba(127, 255, 212, 0.336);
+    padding: 20px;
+}
+.graphList{
+    display: flex;
+    max-width: var(--width-size);
+    width: 100%;
+    max-height: var(--height-size);
+    height:100%;
+    background-color: white;
+}
+.graph{
+    display: flex;
+    flex-direction: column;
+    max-width: var(--width-size);
+    width: 100%;
+    max-height:var(--height-size)+50px;
+    height: 100%;
+   
+}
+.linkedButtonList{
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+.gList{
+    display: flex;
+    justify-content: center;
+    max-width: var(--width-size);
+    /* width: 100%; */
+    max-height: var(--height-size);
+    flex-wrap: wrap;
+    overflow: auto;
+  }
+
