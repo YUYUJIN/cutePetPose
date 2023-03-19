@@ -169,5 +169,5 @@ def monthlyPi(self, table_name, animal_type, output_file):
             'data': data
         }
 
-        with open(output_file, 'w', encoding='utf-8') as f:
-            json.dump(output, f, ensure_ascii=False, indent=4)
+    with open(output_file, 'w', encoding='utf-8') as f:
+        json.dump(output, f, ensure_ascii=False, indent=4)
