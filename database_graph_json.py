@@ -15,7 +15,7 @@ def today(self, table_name, animal_type, output_file):
 
     # time range 내 animal_act별 count 계산
     sql = f"SELECT animal_type, animal_act, HOUR(animal_timestamp), COUNT(*) FROM {table_name} " \
-          f"WHERE animal_type = {animal_type} AND animal_timestamp >= %s AND animal_timestamp < %s GROUP BY animal_act, HOUR(animal_timestamp)"
+          f"WHERE animal_type = {animal_type} AND animal_timestamp >= %s AND animal_timestamp <= %s GROUP BY animal_act, HOUR(animal_timestamp)"
     curs.execute(sql, (start_time, end_time))
     data = curs.fetchall()
 
@@ -56,7 +56,7 @@ def dailyPi(self, table_name, animal_type, output_file):
 
     # time range 내 animal_act별 count 계산
     sql = f"SELECT animal_type, animal_act, DATE(animal_timestamp), COUNT(*) FROM {table_name} " \
-          f"WHERE animal_type = {animal_type} AND animal_timestamp >= %s AND animal_timestamp < %s GROUP BY animal_type, animal_act, DATE(animal_timestamp)"
+          f"WHERE animal_type = {animal_type} AND animal_timestamp >= %s AND animal_timestamp <= %s GROUP BY animal_type, animal_act, DATE(animal_timestamp)"
     curs.execute(sql, (start_timestamp, end_timestamp))
     data = curs.fetchall()
 
@@ -86,7 +86,7 @@ def weeklyPi(self, table_name, animal_type, output_file):
     # time range 내 animal_act별 count 계산
     sql = f"SELECT animal_type, animal_act, DATE(animal_timestamp), HOUR(animal_timestamp), COUNT(*) " \
           f"FROM {table_name} " \
-          f"WHERE animal_type = {animal_type} AND animal_timestamp >= %s AND animal_timestamp < %s " \
+          f"WHERE animal_type = {animal_type} AND animal_timestamp >= %s AND animal_timestamp <= %s " \
           f"GROUP BY animal_type, animal_act, DATE(animal_timestamp), HOUR(animal_timestamp)"
     curs.execute(sql, (start_timestamp, end_timestamp))
     data = curs.fetchall()
@@ -136,7 +136,7 @@ def monthlyPi(self, table_name, animal_type, output_file):
     # time range 내 animal_act별 count 계산
     sql = f"SELECT animal_type, animal_act, YEAR(animal_timestamp), MONTH(animal_timestamp), HOUR(animal_timestamp), COUNT(*) " \
           f"FROM {table_name} " \
-          f"WHERE animal_type = {animal_type} AND animal_timestamp >= %s AND animal_timestamp < %s " \
+          f"WHERE animal_type = {animal_type} AND animal_timestamp >= %s AND animal_timestamp <= %s " \
           f"GROUP BY animal_type, animal_act, YEAR(animal_timestamp), MONTH(animal_timestamp), HOUR(animal_timestamp)"
     curs.execute(sql, (start_timestamp, end_timestamp))
     data = curs.fetchall()
